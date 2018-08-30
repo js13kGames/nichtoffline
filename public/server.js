@@ -17,7 +17,6 @@ setInterval(function () {
 module.exports = {
     io: (socket) => {
         if (server === null) {
-            console.log("set server")
             server = socket.server;
         }
 
@@ -30,7 +29,7 @@ module.exports = {
         socket.on("move", function (dino) {
             let i = dinos.map(function (dino) {
                 return dino.id;
-            }).indexOf(dino.id);
+            }).indexOf(socket.id);
             if (i !== -1) {
                 dinos[i] = dino;
             }
