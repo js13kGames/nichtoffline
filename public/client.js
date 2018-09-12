@@ -8,24 +8,31 @@ let c = document.getElementById("c");
 let ctx = c.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 ctx.fillStyle = dclr;
-ctx.textAlign="center";
+ctx.textAlign = "center";
 ctx.font = "20px Arial";
 
 let asset = new Image();
 asset.src = "dino.png";
 
-socket.on("seed", function(id) {
+socket.on("seed", function (id) {
     init(id);
 });
 
-socket.on("dinos", function(_dinos) {
-    let i = _dinos.map(function(dino) {
+socket.on("dinos", function (_dinos) {
+    let i = _dinos.map(function (dino) {
         return dino.id;
     }).indexOf(me.id);
     if (i !== -1) {
         _dinos.splice(i, 1);
     }
     dinos = _dinos;
+});
+
+document.getElementById("msg").addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        message();
+    }
 });
 
 function init(id) {
@@ -67,5 +74,6 @@ function toGame() {
 function message() {
     me.message = document.getElementById("msg").value;
     me.messageTime = Date.now();
+    document.activeElement.blur();
     document.getElementById("msg").value = "";
 }

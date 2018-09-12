@@ -1,4 +1,7 @@
 document.onkeydown = (event) => {
+    if (event.srcElement.id === "msg")
+        return;
+
     switch (event.keyCode) {
         /*a*/
         case 68:
@@ -25,3 +28,4 @@ document.onkeyup = (event) => {
             break;
     }
 };
+
